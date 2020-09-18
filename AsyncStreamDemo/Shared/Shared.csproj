@@ -1,11 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="rf77.AsyncEnumerableExtensions" Version="0.2.8-preview" />
+    <PackageReference Include="Nito.AsyncEx" Version="5.0.0" />
+    <PackageReference Include="rf77.AsyncEnumerableExtensions" Version="0.2.10-preview" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
   </ItemGroup>
 
 </Project>

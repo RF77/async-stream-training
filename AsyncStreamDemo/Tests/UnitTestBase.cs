@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Shared;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -12,29 +13,26 @@ namespace Tests
 	public class UnitTestBase
 	{
 		private readonly ITestOutputHelper _output;
-		private readonly DateTime _startTime;
-		private DateTime _lastTimeStamp;
+		public MyTestOutputHelper OutputHelper { get; }
 
 		public UnitTestBase(ITestOutputHelper output)
 		{
-			_output = output;
-			_startTime = DateTime.Now;
-			_lastTimeStamp = _startTime;
+			OutputHelper = new MyTestOutputHelper(output);
 		}
 		
-		protected async void WriteStreamToOutput<T>(IAsyncEnumerable<T> stream,
+		protected async void WriteToOutput<T>(IAsyncEnumerable<T> stream,
 			CancellationToken cancellationToken = default)
 		{
-			await WriteStreamToOutputAsync(stream, cancellationToken);
+			await WriteToOutputAsync(stream, cancellationToken);
 		}
 
 		protected async void WriteToOutput<T>(IEnumerable<T> stream,
 			CancellationToken cancellationToken = default)
 		{
-			await WriteStreamToOutputAsync(stream.ToAsyncEnumerable(), cancellationToken);
+			await WriteToOutputAsync(stream.ToAsyncEnumerable(), cancellationToken);
 		}
 
-		protected async Task WriteStreamToOutputAsync<T>(IAsyncEnumerable<T> stream,
+		protected async Task WriteToOutputAsync<T>(IAsyncEnumerable<T> stream,
 			CancellationToken cancellationToken = default)
 		{
 			try
@@ -55,15 +53,12 @@ namespace Tests
 
 			Write("WriteStreamToOutput completed");
 		}
-		
-		protected void Write(string text)
+
+		private void Write(string text)
 		{
-			var now = DateTime.Now;
-			var message =
-				$"[{Thread.CurrentThread.ManagedThreadId}] {((int) (now - _startTime).TotalMilliseconds).ToString("00,000")}ms (Δ {((int) (now - _lastTimeStamp).TotalMilliseconds).ToString("000")}ms): {text}";
-			_output.WriteLine(message);
-			Debug.WriteLine(message);
-			_lastTimeStamp = now;
+			OutputHelper.Write(text);
 		}
 	}
+
+
 }

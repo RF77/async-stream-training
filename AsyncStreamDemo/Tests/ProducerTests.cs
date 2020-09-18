@@ -18,7 +18,7 @@ namespace Tests
 		[Fact]
 		public void GetNumbersAsAsyncEnumerableWithYieldAsStreamTest()
 		{
-			WriteStreamToOutput(_unitUnderTest.GetNumbersAsAsyncEnumerableWithYieldAsStream());
+			WriteToOutput(_unitUnderTest.GetNumbersAsAsyncEnumerableWithYieldAsStream());
 		}
 
 		public ProducerTests(ITestOutputHelper output) : base(output)

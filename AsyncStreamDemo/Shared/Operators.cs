@@ -12,6 +12,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,6 +26,13 @@ namespace Shared
 	/// </summary>
 	public class Operators
 	{
+		private readonly MyTestOutputHelper _myTestOutputHelper;
+
+		public Operators(MyTestOutputHelper myTestOutputHelper)
+		{
+			_myTestOutputHelper = myTestOutputHelper;
+		}
+
 		public IEnumerable<int> OnlyEven(IEnumerable<int> numbers)
 		{
 			foreach (var number in numbers)
@@ -78,21 +86,45 @@ namespace Shared
 			}
 		}
 		
-		public IAsyncEnumerable<double> GetTemperaturesForStationsAsStream2(IEnumerable<int> ids)
+		public IAsyncEnumerable<double> GetTemperaturesForStationListAsStreamSequential(IEnumerable<int> ids)
 		{
 			return ids.ToAsyncEnumerable().SelectAwait(async id => await GetTemperatureForStationWidthIdAsync(id));
 		}
 
-		public IAsyncEnumerable<double> GetTemperaturesForStationsWithAsyncStreamsAsStream(IAsyncEnumerable<int> ids)
+		public IAsyncEnumerable<double> GetTemperaturesForStationsAsStreamParallel(IEnumerable<int> ids)
 		{
-			return ids.SelectAwait(async id => await GetTemperatureForStationWidthIdAsync(id));
+			return ids.ToAsyncEnumerable().Select(GetTemperatureForStationWidthIdAsStream).MergeConcurrently();
+		}
+
+		public IAsyncEnumerable<double> GetTemperaturesForStationsAsStreamParallelButLimited(IEnumerable<int> ids)
+		{
+			return ids.ToAsyncEnumerable().ToReplayQueue().ForEachAsAsyncEnumerable(GetTemperatureForStationWidthIdAsStream, 3);
 		}
 		
+		public IAsyncEnumerable<double> GetTemperaturesForStationsAsStreamParallelButLimited(IAsyncEnumerable<int> ids)
+		{
+			return ids.ForEachAsAsyncEnumerable(GetTemperatureForStationWidthIdAsStream, 3);
+		}
+
+		//public IAsyncEnumerable<double> GetTemperaturesForStationsAsStreamParallelButLimited(IAsyncEnumerable<int> ids)
+		//{
+		//	return ids..SelectAwait(async id => await GetTemperatureForStationWidthIdAsync(id));
+		//}
+
 		private async Task<double> GetTemperatureForStationWidthIdAsync(int stationId)
 		{
+			_myTestOutputHelper.Write($"GetTemperatureForStationWidthIdAsync({stationId})");
 			await Task.Delay(100);
 
 			return Math.Sqrt(stationId) + 10;
+		}
+
+		private async IAsyncEnumerable<double> GetTemperatureForStationWidthIdAsStream(int stationId)
+		{
+			_myTestOutputHelper.Write($"GetTemperatureForStationWidthIdAsync({stationId})");
+			await Task.Delay(100);
+
+			yield return stationId + 20;
 		}
 	}
 }
