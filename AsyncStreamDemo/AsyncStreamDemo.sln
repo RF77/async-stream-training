@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncStreamDemo", "AsyncStreamDemo\AsyncStreamDemo.csproj", "{71354ED6-20CB-4E2A-8971-6B8BA4E6D286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{50FFAA73-1E36-442B-81B1-462C52F39C54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{06A402C6-081D-46AA-A6DF-623DD813945E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71354ED6-20CB-4E2A-8971-6B8BA4E6D286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71354ED6-20CB-4E2A-8971-6B8BA4E6D286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71354ED6-20CB-4E2A-8971-6B8BA4E6D286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71354ED6-20CB-4E2A-8971-6B8BA4E6D286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FFAA73-1E36-442B-81B1-462C52F39C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FFAA73-1E36-442B-81B1-462C52F39C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FFAA73-1E36-442B-81B1-462C52F39C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FFAA73-1E36-442B-81B1-462C52F39C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06A402C6-081D-46AA-A6DF-623DD813945E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A402C6-081D-46AA-A6DF-623DD813945E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A402C6-081D-46AA-A6DF-623DD813945E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A402C6-081D-46AA-A6DF-623DD813945E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0923FD3-2863-4FE5-BAAD-57AB38159D4E}
+	EndGlobalSection
+EndGlobal
